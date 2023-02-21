@@ -41,6 +41,12 @@ const sortByPopularity = () =>{
   const sortedList = contactList.sort((a, b) => b.popularity - a.popularity);
   setcontactList([...sortedList])
 }
+const deleteContact = (event) =>{
+  const filteredList = contactList.filter(contact =>{
+    return contact.id !== event.target.id
+  })
+  setcontactList([...filteredList])
+}
 
   return <div className='App'>
 
@@ -52,16 +58,18 @@ const sortByPopularity = () =>{
     <th>Popularity</th>
     <th>Won an Oscar</th>
     <th>Won an Emmy</th>
+    <th>Delete</th>
    </tr>
   </thead>
   <tbody>
 {contactList.map(celebrity => (
-  <tr key={celebrity.name}>
+  <tr key={celebrity.id}>
     <td><img width="50" alt={celebrity.name} src={celebrity.pictureUrl}></img></td>
     <td>{celebrity.name}</td>
     <td>{celebrity.popularity.toFixed(2)}</td>
     <td>{celebrity.wonOscar ? "🏆" : ""}</td>
     <td>{celebrity.wonEmmy ? "🏆" : ""}</td>
+    <td><button id={celebrity.id} onClick={deleteContact}>Delete</button></td>
   </tr>
 ))}
 
