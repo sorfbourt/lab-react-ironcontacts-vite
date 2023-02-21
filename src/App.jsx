@@ -18,8 +18,28 @@ const addRandom = () =>{
     return el.name !== randomContact.name
   })
   setRemainingContacts(filteredArr)
-  console.log("contactList:", contactList)
-  console.log("remainingContacts:", remainingContacts)
+}
+
+const sortByName = () =>{
+
+const sortedList = contactList.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  setcontactList([...sortedList])
+  
+
+}
+const sortByPopularity = () =>{
+  const sortedList = contactList.sort((a, b) => b.popularity - a.popularity);
+  setcontactList([...sortedList])
 }
 
   return <div className='App'>
@@ -49,6 +69,8 @@ const addRandom = () =>{
   </table>
 
   <button onClick={addRandom}>Add Random Contact</button>
+  <button onClick={sortByName}>Sort by name</button>
+  <button onClick={sortByPopularity}>Sort by popularity</button>
 
   </div>
 }
